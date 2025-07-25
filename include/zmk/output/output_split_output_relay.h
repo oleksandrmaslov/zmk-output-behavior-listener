@@ -26,6 +26,12 @@ struct output_split_output_relay_data {
     bool busy;
 };
 
+struct output_generic_api {
+    int (*set_value)(const struct device *dev, uint8_t value);
+    int (*get_ready)(const struct device *dev);
+    int (*set_payload)(const struct device *dev, const uint8_t *buf, uint8_t len);
+};
+
 #ifdef __cplusplus
 }
 #endif
