@@ -57,9 +57,20 @@ static int output_split_output_relay_init(const struct device *dev) {
     return 0;
 }
 
+static int output_split_output_relay_set_payload(const struct device *dev,
+                                                 const uint8_t *buf, uint8_t len) {
+    // Здесь вы обновляете виджет nice!view: преобразуете буфер в строку и вызываете нужную функцию,
+    // например, nice_view_hid_update_text(buf, len);
+    ARG_UNUSED(dev);
+    ARG_UNUSED(buf);
+    ARG_UNUSED(len);
+    return 0;
+}
+
 static const struct output_generic_api api = {
     .set_value = output_split_output_relay_set_value,
     .get_ready = output_split_output_relay_get_ready,
+    .set_payload = output_split_output_relay_set_payload,
 };
 
 #define ZMK_OUTPUT_INIT_PRIORITY 91
