@@ -1,9 +1,3 @@
-/*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
 #pragma once
 
 #include <zephyr/kernel.h>
@@ -11,7 +5,6 @@
 #include <stddef.h>
 #include <zephyr/device.h>
 #include <zephyr/drivers/gpio.h>
-
 #include <zmk/output/output_generic_api.h>
 
 #ifdef __cplusplus
@@ -26,16 +19,16 @@ struct output_split_output_relay_data {
     bool busy;
 };
 
-static const struct output_split_output_relay_api api = {
-    .set_value = output_split_output_relay_set_value,
-    .get_ready = output_split_output_relay_get_ready,
-    .set_payload = output_split_output_relay_set_payload,
+/* Расширенный API для split‑relay:
+ * добавляет функцию set_payload(), отправляющую буфер на периферию.
+ */
+struct output_split_output_relay_api {
+    int (*set_value)(const struct device *dev, uint8_t value);
+    int (*get_ready)(const struct device *dev);
+    int (*set_payload)(const struct device *dev,
+                       const uint8_t *buf, uint8_t len);
 };
 
 #ifdef __cplusplus
 }
 #endif
-
-/**
- * @}
- */
