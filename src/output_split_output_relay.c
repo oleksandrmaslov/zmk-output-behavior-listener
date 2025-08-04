@@ -67,9 +67,10 @@ static int output_split_output_relay_set_payload(const struct device *dev,
     return 0;
 }
 
-static const struct output_generic_api api = {
-    .set_value = output_split_output_relay_set_value,
-    .get_ready = output_split_output_relay_get_ready,
+// Используем расширенный API, а не generic
+static const struct output_split_output_relay_api api = {
+    .set_value  = output_split_output_relay_set_value,
+    .get_ready  = output_split_output_relay_get_ready,
     .set_payload = output_split_output_relay_set_payload,
 };
 
